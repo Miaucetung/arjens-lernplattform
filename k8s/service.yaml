@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lernplattform
+  namespace: lernplattform
+  labels:
+    app: lernplattform
+    app.kubernetes.io/name: lernplattform
+    app.kubernetes.io/part-of: arjens-lernplattform
+    app.kubernetes.io/component: web
+spec:
+  type: ClusterIP
+  selector:
+    app: lernplattform
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+      protocol: TCP

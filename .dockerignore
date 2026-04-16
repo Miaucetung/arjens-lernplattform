@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.github
+*.md
+.env*
+.vscode
+k8s
+docker-compose*.yml
+.dockerignore
+Dockerfile
+coverage
+.eslintcache

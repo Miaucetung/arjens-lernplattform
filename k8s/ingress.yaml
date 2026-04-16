@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lernplattform
+  namespace: lernplattform
+  labels:
+    app: lernplattform
+    app.kubernetes.io/name: lernplattform
+    app.kubernetes.io/part-of: arjens-lernplattform
+  annotations:
+    # ── Cloudflare-kompatibel (kein eigenes Cert nötig bei CF Proxy) ──
+    # Falls du cert-manager nutzt, aktiviere diese Zeilen:
+    # cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    #
+    # ── Nginx Ingress Controller ──
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "60"
+    # Sicherheits-Header
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Frame-Options: DENY";
+      more_set_headers "X-Content-Type-Options: nosniff";
+      more_set_headers "X-XSS-Protection: 1; mode=block";
+      more_set_headers "Referrer-Policy: strict-origin-when-cross-origin";
+spec:
+  ingressClassName: nginx
+  # TLS – aktiviere wenn du cert-manager/eigenes Cert nutzt
+  # tls:
+  #   - hosts:
+  #       - lernen.DOMAIN.de
+  #     secretName: lernplattform-tls
+  rules:
+    - host: lernen.DOMAIN.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: lernplattform
+                port:
+                  name: http

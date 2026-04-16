@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: lernplattform
+  labels:
+    app.kubernetes.io/part-of: arjens-lernplattform
+    purpose: education

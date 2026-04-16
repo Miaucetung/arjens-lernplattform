@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+@layer base {
+  :root {
+    --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    --gradient-success: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    --gradient-xp: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+  }
+
+  body {
+    @apply bg-gray-950 text-white antialiased;
+    font-family: "Inter", system-ui, sans-serif;
+  }
+
+  * {
+    @apply scroll-smooth;
+  }
+}
+
+@layer components {
+  .card-glass {
+    @apply bg-gray-900/60 backdrop-blur-xl border border-gray-800/50 rounded-2xl;
+  }
+
+  .card-interactive {
+    @apply card-glass hover:border-primary-500/50 hover:shadow-lg hover:shadow-primary-500/10 transition-all duration-300 cursor-pointer;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold px-6 py-3 rounded-xl
+           hover:from-primary-600 hover:to-primary-700 active:scale-[0.98] transition-all duration-200
+           shadow-lg shadow-primary-500/25;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-800 text-gray-200 font-medium px-6 py-3 rounded-xl border border-gray-700
+           hover:bg-gray-700 hover:border-gray-600 active:scale-[0.98] transition-all duration-200;
+  }
+
+  .btn-success {
+    @apply bg-gradient-to-r from-success-500 to-success-600 text-white font-semibold px-6 py-3 rounded-xl
+           hover:from-success-600 hover:to-green-700 active:scale-[0.98] transition-all duration-200
+           shadow-lg shadow-success-500/25;
+  }
+
+  .badge-xp {
+    @apply inline-flex items-center gap-1.5 bg-amber-500/20 text-amber-400 font-bold px-3 py-1 rounded-full text-sm;
+  }
+
+  .progress-bar {
+    @apply h-2 bg-gray-800 rounded-full overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply h-full rounded-full transition-all duration-700 ease-out;
+    background: var(--gradient-primary);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400;
+  }
+}
+
+@layer utilities {
+  .animate-delay-100 {
+    animation-delay: 100ms;
+  }
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animate-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animate-delay-500 {
+    animation-delay: 500ms;
+  }
+}
