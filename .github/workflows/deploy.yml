@@ -9,9 +9,9 @@ name: Build & Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
 
 env:
   REGISTRY: ghcr.io
@@ -47,7 +47,7 @@ jobs:
     name: Build & Push Image
     runs-on: ubuntu-latest
     needs: lint
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     outputs:
       image-tag: ${{ steps.meta.outputs.tags }}
       digest: ${{ steps.build-push.outputs.digest }}
@@ -92,7 +92,7 @@ jobs:
     name: Deploy to K8s
     runs-on: ubuntu-latest
     needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     environment: production
     steps:
       - uses: actions/checkout@v4
@@ -108,7 +108,7 @@ jobs:
           # Image-Tag auf den aktuellen SHA setzen
           cd k8s
           kubectl kustomize . | \
-            sed "s|ghcr.io/OWNER/arjens-lernplattform:latest|${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}|g" | \
+            sed "s|ghcr.io/miaucetung/arjens-lernplattform:latest|${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}|g" | \
             kubectl apply -f -
 
       - name: Wait for rollout

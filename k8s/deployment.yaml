@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/part-of: arjens-lernplattform
     app.kubernetes.io/component: web
 spec:
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 5
   strategy:
     type: RollingUpdate
@@ -31,7 +31,7 @@ spec:
         kubernetes.io/hostname: ssf2
       containers:
         - name: lernplattform
-          image: ghcr.io/OWNER/arjens-lernplattform:latest
+          image: ghcr.io/miaucetung/arjens-lernplattform:latest
           imagePullPolicy: Always
           ports:
             - name: http
@@ -41,7 +41,7 @@ spec:
             - name: NODE_ENV
               value: "production"
             - name: NEXT_PUBLIC_APP_URL
-              value: "https://lernen.DOMAIN.de"
+              value: "https://arjens-lernplattform.ajti.online"
           resources:
             requests:
               cpu: 50m
@@ -77,6 +77,4 @@ spec:
             runAsUser: 1001
             readOnlyRootFilesystem: false
             allowPrivilegeEscalation: false
-      imagePullSecrets:
-        - name: ghcr-secret
       terminationGracePeriodSeconds: 30

@@ -16,5 +16,5 @@ commonLabels:
   app.kubernetes.io/managed-by: kustomize
 
 images:
-  - name: ghcr.io/OWNER/arjens-lernplattform
+  - name: ghcr.io/miaucetung/arjens-lernplattform
     newTag: latest

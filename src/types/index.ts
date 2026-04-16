@@ -94,8 +94,11 @@ export interface PracticeData {
 
 export interface PracticeItem {
   id: string;
-  label: string;
+  label?: string;
   category?: string;
+  prompt?: string;
+  options?: string[];
+  correct?: string;
 }
 
 export interface BlankItem {

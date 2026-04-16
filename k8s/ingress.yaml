@@ -12,25 +12,17 @@ metadata:
     # Falls du cert-manager nutzt, aktiviere diese Zeilen:
     # cert-manager.io/cluster-issuer: "letsencrypt-prod"
     #
-    # ── Nginx Ingress Controller ──
-    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "60"
-    # Sicherheits-Header
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      more_set_headers "X-Frame-Options: DENY";
-      more_set_headers "X-Content-Type-Options: nosniff";
-      more_set_headers "X-XSS-Protection: 1; mode=block";
-      more_set_headers "Referrer-Policy: strict-origin-when-cross-origin";
+    # ── Traefik Ingress Controller ──
+    traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   # TLS – aktiviere wenn du cert-manager/eigenes Cert nutzt
   # tls:
   #   - hosts:
-  #       - lernen.DOMAIN.de
+  #       - arjens-lernplattform.ajti.online
   #     secretName: lernplattform-tls
   rules:
-    - host: lernen.DOMAIN.de
+    - host: arjens-lernplattform.ajti.online
       http:
         paths:
           - path: /
