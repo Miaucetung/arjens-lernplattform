@@ -98,4 +98,18 @@ export const subjects: Subject[] = [
     available: false,
     modules: [],
   },
+
+  // ═══════════════════════════════════════
+  // BOSNISCH – Vollständig ausgearbeitet
+  // ═══════════════════════════════════════
+  {
+    id: "bosnisch",
+    name: "Bosnisch",
+    icon: "🇧🇦",
+    color: "#f97316",
+    gradient: "from-orange-500 to-yellow-500",
+    description: "Pravopis, Sonderzeichen & Ijekavica",
+    available: true,
+    modules: [],
+  },
 ];
