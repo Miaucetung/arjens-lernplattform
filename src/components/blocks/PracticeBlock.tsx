@@ -157,6 +157,10 @@ function OrderPractice({ data }: { data: PracticeData }) {
 }
 
 function SelectPractice({ data }: { data: PracticeData }) {
+  // If items have prompt/options/correct → per-item classification mode
+  const isClassify = data.items?.some((item) => item.prompt !== undefined);
+  if (isClassify) return <ClassifyPractice data={data} />;
+
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [checked, setChecked] = useState(false);
 
@@ -215,6 +219,84 @@ function SelectPractice({ data }: { data: PracticeData }) {
       {checked && (
         <p className={`mt-4 text-center font-bold animate-bounce-in ${allCorrect ? "text-green-400" : "text-amber-400"}`}>
           {allCorrect ? "🎉 Perfekt!" : "Schau genau hin – manche fehlen noch!"}
+        </p>
+      )}
+    </div>
+  );
+}
+
+// Per-item classification: each item has prompt + options, user picks one per item
+function ClassifyPractice({ data }: { data: PracticeData }) {
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [checked, setChecked] = useState(false);
+
+  const allAnswered = (data.items?.length ?? 0) > 0 &&
+    data.items?.every((item) => answers[item.id] !== undefined);
+
+  const score = data.items?.filter(
+    (item) => answers[item.id] === item.correct
+  ).length ?? 0;
+  const total = data.items?.length ?? 0;
+  const allCorrect = score === total;
+
+  return (
+    <div className="card-glass p-5 animate-slide-up">
+      <div className="flex items-center gap-2 mb-3">
+        <span className="text-xl">👆</span>
+        <span className="text-sm font-semibold text-yellow-400 uppercase tracking-wide">Auswählen</span>
+      </div>
+      <p className="text-gray-300 mb-4">{data.instruction}</p>
+
+      <div className="space-y-4">
+        {data.items?.map((item) => {
+          const chosen = answers[item.id];
+          const isCorrect = chosen === item.correct;
+
+          return (
+            <div key={item.id} className="bg-gray-800/40 rounded-xl p-3 border border-gray-700/50">
+              <p className="text-sm font-semibold text-white mb-2">{item.prompt}</p>
+              <div className="flex flex-wrap gap-2">
+                {item.options?.map((opt) => {
+                  let style = "border-gray-700 bg-gray-800 text-gray-300 hover:border-gray-500";
+                  if (checked) {
+                    if (opt === item.correct) style = "border-green-500 bg-green-500/15 text-green-300";
+                    else if (opt === chosen && !isCorrect) style = "border-red-500 bg-red-500/15 text-red-300 line-through opacity-70";
+                    else style = "border-gray-800 bg-gray-900/50 text-gray-600";
+                  } else if (opt === chosen) {
+                    style = "border-blue-500 bg-blue-500/15 text-blue-300";
+                  }
+
+                  return (
+                    <button
+                      key={opt}
+                      disabled={checked}
+                      onClick={() => setAnswers({ ...answers, [item.id]: opt })}
+                      className={`px-3 py-1.5 rounded-lg border text-sm font-medium transition-all ${style}`}
+                    >
+                      {checked && opt === item.correct && <span className="mr-1">✓</span>}
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {!checked && (
+        <button
+          onClick={() => setChecked(true)}
+          disabled={!allAnswered}
+          className="btn-primary w-full mt-4 disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          Überprüfen
+        </button>
+      )}
+
+      {checked && (
+        <p className={`mt-4 text-center font-bold animate-bounce-in ${allCorrect ? "text-green-400" : "text-amber-400"}`}>
+          {allCorrect ? `🎉 Perfekt! Alle ${total} richtig!` : `${score} von ${total} richtig – fast!`}
         </p>
       )}
     </div>
