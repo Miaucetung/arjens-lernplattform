@@ -3,21 +3,26 @@
 import Link from "next/link";
 import { useAppStore } from "@/store/useAppStore";
 import { bosnischLessons, bosnischLessonOrder } from "@/data/bosnisch/pravopis";
+import { gramatikLessons, gramatikLessonOrder } from "@/data/bosnisch/gramatika";
 
 export default function BosnischPage() {
   const { completedLessons } = useAppStore((s) => s.progress);
 
-  const totalXp = bosnischLessonOrder.reduce((sum, id) => {
-    return sum + bosnischLessons[id].xpReward;
-  }, 0);
+  // Pravopis
+  const pravopisTotal = bosnischLessonOrder.reduce((sum, id) => sum + bosnischLessons[id].xpReward, 0);
+  const pravopisEarned = bosnischLessonOrder.reduce((sum, id) => sum + (completedLessons.includes(id) ? bosnischLessons[id].xpReward : 0), 0);
+  const pravopisCompleted = bosnischLessonOrder.filter((id) => completedLessons.includes(id)).length;
 
-  const earnedXp = bosnischLessonOrder.reduce((sum, id) => {
-    return sum + (completedLessons.includes(id) ? bosnischLessons[id].xpReward : 0);
-  }, 0);
+  // Gramatika
+  const gramatikaTotal = gramatikLessonOrder.reduce((sum, id) => sum + gramatikLessons[id].xpReward, 0);
+  const gramatikaEarned = gramatikLessonOrder.reduce((sum, id) => sum + (completedLessons.includes(id) ? gramatikLessons[id].xpReward : 0), 0);
+  const gramatikaCompleted = gramatikLessonOrder.filter((id) => completedLessons.includes(id)).length;
 
-  const completedCount = bosnischLessonOrder.filter((id) =>
-    completedLessons.includes(id)
-  ).length;
+  // Overall
+  const totalXp = pravopisTotal + gramatikaTotal;
+  const earnedXp = pravopisEarned + gramatikaEarned;
+  const totalLessons = bosnischLessonOrder.length + gramatikLessonOrder.length;
+  const completedCount = pravopisCompleted + gramatikaCompleted;
 
   return (
     <main className="min-h-screen pb-20">
@@ -39,7 +44,7 @@ export default function BosnischPage() {
           <div className="mt-4 card-glass p-3">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm text-gray-400">
-                {completedCount}/{bosnischLessonOrder.length} Lektionen abgeschlossen
+              {completedCount}/{totalLessons} Lektionen abgeschlossen
               </span>
               <span className="badge-xp text-xs">{earnedXp}/{totalXp} XP</span>
             </div>
@@ -87,9 +92,9 @@ export default function BosnischPage() {
             <p className="text-sm text-gray-400">Bosnische Rechtschreibung – Grundlagen</p>
             <div className="flex items-center gap-3 mt-2">
               <span className="text-xs text-gray-500">
-                {completedCount}/{bosnischLessonOrder.length} Lektionen
+                {pravopisCompleted}/{bosnischLessonOrder.length} Lektionen
               </span>
-              <span className="text-xs text-orange-400">bis zu +{totalXp} XP</span>
+              <span className="text-xs text-orange-400">bis zu +{pravopisTotal} XP</span>
               <span className="text-xs text-gray-500">~50 Min.</span>
             </div>
             {/* Mini-progress */}
@@ -97,8 +102,42 @@ export default function BosnischPage() {
               <div
                 className="progress-bar-fill"
                 style={{
-                  width: `${bosnischLessonOrder.length > 0 ? (completedCount / bosnischLessonOrder.length) * 100 : 0}%`,
+                  width: `${bosnischLessonOrder.length > 0 ? (pravopisCompleted / bosnischLessonOrder.length) * 100 : 0}%`,
                   background: "linear-gradient(to right, #f97316, #eab308)",
+                }}
+              />
+            </div>
+          </div>
+          <span className="text-gray-500 flex-shrink-0">→</span>
+        </Link>
+
+        {/* Gramatika – aktiv */}
+        <Link
+          href="/fach/bosnisch/gramatika"
+          className="card-interactive p-5 flex items-center gap-4 block mb-3 mt-3"
+        >
+          <div
+            className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl flex-shrink-0"
+            style={{ background: "linear-gradient(135deg, #3b82f6, #06b6d4)" }}
+          >
+            🔤
+          </div>
+          <div className="flex-1">
+            <h3 className="font-bold text-white text-lg">Gramatika</h3>
+            <p className="text-sm text-gray-400">Bosnische Grammatik – Grundstufe A1</p>
+            <div className="flex items-center gap-3 mt-2">
+              <span className="text-xs text-gray-500">
+                {gramatikaCompleted}/{gramatikLessonOrder.length} Lektionen
+              </span>
+              <span className="text-xs font-semibold" style={{ color: "#3b82f6" }}>bis zu +{gramatikaTotal} XP</span>
+              <span className="text-xs text-gray-500">~66 Min.</span>
+            </div>
+            <div className="progress-bar mt-2">
+              <div
+                className="progress-bar-fill"
+                style={{
+                  width: `${gramatikLessonOrder.length > 0 ? (gramatikaCompleted / gramatikLessonOrder.length) * 100 : 0}%`,
+                  background: "linear-gradient(to right, #3b82f6, #06b6d4)",
                 }}
               />
             </div>
@@ -109,7 +148,6 @@ export default function BosnischPage() {
         {/* Coming soon modules */}
         <div className="space-y-3 mt-2">
           {[
-            { icon: "🔤", title: "Gramatika", desc: "Padežsystem, Deklinationen & Konjugationen", tag: "Kommt bald" },
             { icon: "📚", title: "Vokabular", desc: "Thematischer Wortschatz & Phrasen", tag: "Kommt bald" },
             { icon: "✍️", title: "Pisanje", desc: "Aufsatz schreiben auf Bosnisch", tag: "Kommt bald" },
           ].map((mod) => (
