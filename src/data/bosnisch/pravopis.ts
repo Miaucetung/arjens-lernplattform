@@ -7,6 +7,17 @@ import { LearningBlock } from "@/types";
 
 export const lesson1_pismo: LearningBlock[] = [
   {
+    id: "pismo-intro-1",
+    type: "info",
+    data: {
+      title: "Dobro došao u Bosnisch! 🇧🇦",
+      emoji: "🎯",
+      content: "Zdravo! – Das ist dein erstes bosnisches Wort. Hallo!\n\nBosnisch klingt wie Musik – aber es hat ein paar Buchstaben, die Deutsch nicht kennt. Genau die lernst du heute!\n\nDas lernst du in dieser Lektion:\n✅ Das bosnische Alphabet (30 Buchstaben)\n✅ Die 6 Sonderzeichen: Č Ć Š Ž DŽ Đ\n✅ Wie sie klingen – mit deutschen Vergleichen\n✅ Erste Wörter auf Bosnisch lesen und erkennen",
+      highlight: "Nach dieser Lektion kannst du bosnische Texte laut vorlesen – wie ein Einheimischer!",
+    },
+  },
+
+  {
     id: "pismo-pred-1",
     type: "prediction",
     data: {
@@ -157,6 +168,17 @@ export const lesson1_pismo: LearningBlock[] = [
 
 export const lesson2_c_c: LearningBlock[] = [
   {
+    id: "cc-intro-1",
+    type: "info",
+    data: {
+      title: "Lektion 2: Č vs. Ć – klingt gleich, ist aber nicht gleich",
+      emoji: "👂",
+      content: "Stell dir vor: Du bestellst in Sarajevo einen čaj (Tee) – super!\nAber dann fragst du nach dem čup – und bekommst ein Haarbüschel statt des Tontopfes (ćup), den du wolltest. 😄\n\nEin Buchstabe, eine andere Bedeutung. Das ist Bosnisch!\n\nDas lernst du heute:\n✅ Wo Č und Ć im Mund gebildet werden\n✅ Welche Wörter ihre Bedeutung durch Č/Ć verändern\n✅ Die Grammatikregel: K/C → Č und T → Ć\n✅ Die wichtigsten Alltagswörter mit Č und Ć",
+      highlight: "čaj (Tee) mit Č ✓  |  kuća (Haus) mit Ć ✓  – Ein Buchstabe macht den Unterschied!",
+    },
+  },
+
+  {
     id: "cc-pred-1",
     type: "prediction",
     data: {
@@ -292,6 +314,17 @@ export const lesson2_c_c: LearningBlock[] = [
 
 export const lesson3_dz_d: LearningBlock[] = [
   {
+    id: "dzd-intro-1",
+    type: "info",
+    data: {
+      title: "Lektion 3: DŽ und Đ – die zwei Dsch-Laute",
+      emoji: "🎺",
+      content: "Gehst du zur džamija (Moschee) in Sarajevo?\nOder triffst du einen đak (Schüler) auf dem Weg zur škola?\n\nBeide Laute klingen wie 'Dsch' – aber sie haben verschiedene Ursprünge und Bedeutungen:\n• DŽ – das harte, deutliche dsch (wie in 'Dschungel')\n• Đ – das weiche, fließende dj (das sanftere Gegenstück)\n\nDas lernst du heute:\n✅ DŽ vs. Đ – Aussprache Schritt für Schritt\n✅ Welche Wörter DŽ haben (oft arabisch/türkisch)\n✅ Welche Wörter Đ haben (oft slawisch)\n✅ Die Regel: Č wird zu DŽ vor stimmhaftem B",
+      highlight: "džamija (Moschee) mit DŽ ✓  |  đak (Schüler) mit Đ ✓",
+    },
+  },
+
+  {
     id: "dzd-pred-1",
     type: "prediction",
     data: {
@@ -419,6 +452,17 @@ export const lesson3_dz_d: LearningBlock[] = [
 // ═══════════════════════════════════════════════════
 
 export const lesson4_glas_h: LearningBlock[] = [
+  {
+    id: "h-intro-1",
+    type: "info",
+    data: {
+      title: "Lektion 4: Das H – Bosnisch spricht aus, was andere weglassen",
+      emoji: "💨",
+      content: "Sevdah.\n\nDieses Wort trägt die Seele Bosniens: Sehnsucht, Melancholie, tiefe Emotion. Und es endet auf H – ein H, das man hört und schreibt.\n\nBosnisch bewahrt das H, wo andere Sprachen es längst verloren haben:\n• lahak (leicht) – Serbisch sagt: lak\n• mehak (weich) – Serbisch sagt: mek\n• sevdah (Sehnsucht) – ohne H klingt es nicht bosnisch\n\nDas lernst du heute:\n✅ Wo H im bosnischen Wortschatz erscheint\n✅ Das H in Grammatikformen (Genitiv, Aorist, Konditional)\n✅ Häufige H-Wörter aus dem Alltag\n✅ Warum das H in Bosnisch niemals optional ist",
+      highlight: "od mladih, rekoh, govorio bih – das H ist kein Tippfehler, es ist Pflicht!",
+    },
+  },
+
   {
     id: "h-pred-1",
     type: "prediction",
@@ -554,6 +598,17 @@ export const lesson4_glas_h: LearningBlock[] = [
 // ═══════════════════════════════════════════════════
 
 export const lesson5_ije_je: LearningBlock[] = [
+  {
+    id: "ije-intro-1",
+    type: "info",
+    data: {
+      title: "Lektion 5: Ijekavica – das klingende Herz des Bosnischen",
+      emoji: "🎵",
+      content: "Hörst du den Unterschied?\n\n🇧🇦 Bosnisch: \"Dijete pije mlijeko.\" (Kind trinkt Milch.)\n🇷🇸 Serbisch: \"Dete pije mleko.\"\n\nDieselbe Bedeutung – aber das Bosnische klingt weicher und melodischer. Das liegt an der Ijekavica: einer jahrhundertealten Ausspracheform, die Bosnien und Kroatien von Serbien unterscheidet.\n\nDas lernst du heute:\n✅ Was Ijekavica bedeutet und woher sie kommt\n✅ Die Regel: wann IJE (lange Silbe), wann JE (kurze Silbe)\n✅ Die 12 häufigsten Ijekavica-Wörter im Alltag\n✅ Ekavische Fehler erkennen und korrigieren",
+      highlight: "lijepo, dijete, mlijeko, vrijeme – das ist bosnisch. lepo, dete, mleko – das ist es nicht!",
+    },
+  },
+
   {
     id: "ije-pred-1",
     type: "prediction",
